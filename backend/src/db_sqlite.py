@@ -1,4 +1,4 @@
-import streamlit as st
+
 import pandas as pd
 from datetime import datetime
 import json
@@ -25,7 +25,7 @@ def init_gamification_db():
         try:
             run_query("ALTER TABLE user_progress ADD COLUMN unlocked_badges TEXT DEFAULT '[]'")
         except Exception as e:
-            st.error(f"Migration failed: {e}")
+            print(f"Migration failed: {e}")
 
     # 3. Ensure raw row exists
     check = run_query("SELECT id FROM user_progress WHERE id = 1")
@@ -110,7 +110,7 @@ def add_habit(habit_data):
         # Clear cache logic if we were using st.cache_data, but with SQL we just requery
         return True
     except Exception as e:
-        st.error(f"Error adding habit: {e}")
+        print(f"Error adding habit: {e}")
         return False
 
 def edit_habit(habit_id, updated_data):
@@ -132,7 +132,7 @@ def edit_habit(habit_id, updated_data):
         run_query(query, params)
         return True
     except Exception as e:
-        st.error(f"Error updating habit: {e}")
+        print(f"Error updating habit: {e}")
         return False
 
 def delete_habit(habit_id):
@@ -142,7 +142,7 @@ def delete_habit(habit_id):
         run_query(query, (habit_id,))
         return True
     except Exception as e:
-        st.error(f"Error deleting habit: {e}")
+        print(f"Error deleting habit: {e}")
         return False
 
 def log_habit_completion(habit_id, date, status="Completed", notes="", value=1):
@@ -231,7 +231,7 @@ def log_habit_completion(habit_id, date, status="Completed", notes="", value=1):
         return True, {"xp_earned": 0}
         
     except Exception as e:
-        st.error(f"Error logging habit: {e}")
+        print(f"Error logging habit: {e}")
         return False, {}
 
 def get_habit_stats(habit_id):
@@ -254,7 +254,7 @@ def add_reminder(text, priority='low'):
         run_query(query, (text, priority))
         return True
     except Exception as e:
-        st.error(f"Error adding reminder: {e}")
+        print(f"Error adding reminder: {e}")
         return False
 
 def get_reminders(pending_only=True):
@@ -272,7 +272,7 @@ def update_reminder_status(reminder_id, is_completed=True):
         run_query(query, (val, reminder_id))
         return True
     except Exception as e:
-        st.error(f"Error updating reminder status: {e}")
+        print(f"Error updating reminder status: {e}")
         return False
 
 def delete_reminder(reminder_id):
@@ -281,7 +281,7 @@ def delete_reminder(reminder_id):
         run_query(query, (reminder_id,))
         return True
     except Exception as e:
-        st.error(f"Error deleting reminder: {e}")
+        print(f"Error deleting reminder: {e}")
         return False
     
 # --- Project Reminder System ---
@@ -292,7 +292,7 @@ def add_project(text, description, priority='low'):
         run_query(query, (text, description, priority))
         return True
     except Exception as e:
-        st.error(f"Error adding project: {e}")
+        print(f"Error adding project: {e}")
         return False
 
 def get_projects(pending_only=True):
@@ -310,7 +310,7 @@ def update_project_status(project_id, is_completed=True):
         run_query(query, (val, project_id))
         return True
     except Exception as e:
-        st.error(f"Error updating project status: {e}")
+        print(f"Error updating project status: {e}")
         return False
 
 def delete_project(project_id):
@@ -319,5 +319,5 @@ def delete_project(project_id):
         run_query(query, (project_id,))
         return True
     except Exception as e:
-        st.error(f"Error deleting project: {e}")
+        print(f"Error deleting project: {e}")
         return False

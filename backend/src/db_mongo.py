@@ -1,4 +1,4 @@
-import streamlit as st
+
 import pandas as pd
 from datetime import datetime
 import os
@@ -21,7 +21,7 @@ def get_db():
     if DB is None:
         uri = os.getenv("MONGO_URI")
         if not uri:
-            st.error("MONGO_URI not found in .env")
+            print("MONGO_URI not found in .env")
             return None
         try:
             # Added tlsCAFile for Windows SSL handshake issues
@@ -33,7 +33,7 @@ def get_db():
                 db_name = uri.split("/")[-1].split("?")[0] or "habit_tracker"
             DB = CLIENT[db_name]
         except Exception as e:
-            st.error(f"Failed to connect to MongoDB: {e}")
+            print(f"Failed to connect to MongoDB: {e}")
             return None
     return DB
 
@@ -131,7 +131,7 @@ def add_habit(habit_data):
         db.habits.insert_one(habit_data)
         return True
     except Exception as e:
-        st.error(f"Mongo Error: {e}")
+        print(f"Mongo Error: {e}")
         return False
 
 def edit_habit(habit_id, updated_data):
@@ -143,7 +143,7 @@ def edit_habit(habit_id, updated_data):
         )
         return True
     except Exception as e:
-        st.error(f"Mongo Error: {e}")
+        print(f"Mongo Error: {e}")
         return False
 
 def delete_habit(habit_id):
@@ -155,7 +155,7 @@ def delete_habit(habit_id):
         )
         return True
     except Exception as e:
-        st.error(f"Mongo Error: {e}")
+        print(f"Mongo Error: {e}")
         return False
 
 def log_habit_completion(habit_id_str, date, status="Completed", notes="", value=1):
@@ -229,7 +229,7 @@ def log_habit_completion(habit_id_str, date, status="Completed", notes="", value
         return True, {"xp_earned": 0}
         
     except Exception as e:
-        st.error(f"Mongo Error: {e}")
+        print(f"Mongo Error: {e}")
         return False, {}
 
 def get_habit_stats(habit_id):
