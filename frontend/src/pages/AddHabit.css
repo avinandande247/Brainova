@@ -1,0 +1,37 @@
+.add-habit-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-panel {
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.habit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.form-message {
+  text-align: center;
+  color: var(--primary-color);
+  margin-top: 1rem;
+}

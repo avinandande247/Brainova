@@ -1,0 +1,63 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.dashboard-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .dashboard-main-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.progress-section, .habits-section {
+  padding: 1.5rem;
+}
+
+.progress-ring-container {
+  position: relative;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.progress-text h2 {
+  margin: 0;
+  color: var(--primary-color);
+}
+
+.habits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.habits-list::-webkit-scrollbar {
+  width: 6px;
+}
+.habits-list::-webkit-scrollbar-thumb {
+  background: var(--glass-border);
+  border-radius: 4px;
+}
+
+.mb-2 { margin-bottom: 2rem; }
+.mt-2 { margin-top: 2rem; }
+.p-2 { padding: 1.5rem; }

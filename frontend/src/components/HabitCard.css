@@ -1,0 +1,27 @@
+.habit-card {
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+.habit-card:hover {
+  transform: translateY(-2px);
+}
+
+.habit-name {
+  margin: 0 0 0.5rem 0;
+  color: var(--text-primary);
+}
+
+.habit-streak {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--primary-color);
+}
+
+.habit-log-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
