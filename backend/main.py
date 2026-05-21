@@ -163,3 +163,45 @@ def api_insights():
         "quote": quote,
         "best_streak": best_streak
     }
+
+@app.get("/api/analytics")
+def api_analytics():
+    habits = load_habits(active_only=True)
+    logs = load_logs(days_back=365)
+
+    # 1. Day-of-week completion stats
+    dow_df = get_day_of_week_stats(logs)
+    day_of_week = dow_df.to_dict(orient="records") if not dow_df.empty else []
+
+    # 2. Per-habit stats (streak + completion rate)
+    habit_stats = []
+    if not habits.empty:
+        for _, h in habits.iterrows():
+            h_logs = logs[logs['habit_id'] == h['id']] if not logs.empty else logs
+            streak = calculate_streaks(h, h_logs)
+            rate, total_due = calculate_completion_rate(h, h_logs)
+            habit_stats.append({
+                "name": h['name'],
+                "category": h.get('category', ''),
+                "streak": streak,
+                "completion_rate": round(rate, 1),
+                "total_due": total_due,
+                "total_completed": len(h_logs['date'].unique()) if not h_logs.empty else 0
+            })
+
+    # 3. Most missed habits
+    missed_df = calculate_missed_habits(habits, logs, days=30)
+    missed = missed_df.to_dict(orient="records") if not missed_df.empty else []
+
+    # 4. Overall stats
+    total_completions = len(logs) if not logs.empty else 0
+    total_habits = len(habits) if not habits.empty else 0
+
+    return {
+        "day_of_week": day_of_week,
+        "habit_stats": habit_stats,
+        "missed_habits": missed,
+        "total_completions": total_completions,
+        "total_habits": total_habits
+    }
+
