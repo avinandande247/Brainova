@@ -29,8 +29,8 @@ app.add_middleware(
 # --- MODELS ---
 class HabitCreate(BaseModel):
     name: str
-    category: str
-    frequency_type: str
+    category: str = "General"
+    frequency_type: str = "daily"
     frequency_value: Optional[str] = None
     target_value: int = 1
 
