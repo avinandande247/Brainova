@@ -112,7 +112,7 @@ const Dashboard = () => {
         <div className="glass-panel habits-section">
           <h3>Today's Habits</h3>
           <div className="habits-list">
-            {habits.length > 0 ? (
+            {Array.isArray(habits) && habits.length > 0 ? (
               habits.map(habit => (
                 <HabitCard key={habit.id || habit._id} habit={habit} onLog={handleLogHabit} />
               ))

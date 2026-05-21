@@ -36,7 +36,7 @@ const Reminders = () => {
       <div className="reminders-grid mt-2">
         <div className="glass-panel p-2">
           <h3>Reminders</h3>
-          {reminders.length > 0 ? (
+          {Array.isArray(reminders) && reminders.length > 0 ? (
             <ul className="reminders-list">
               {reminders.map((rem, i) => (
                 <li key={i} className="reminder-item">
@@ -52,7 +52,7 @@ const Reminders = () => {
 
         <div className="glass-panel p-2">
           <h3>Active Projects</h3>
-          {projects.length > 0 ? (
+          {Array.isArray(projects) && projects.length > 0 ? (
             <div className="projects-list">
               {projects.map((proj, i) => (
                 <div key={i} className="project-card">

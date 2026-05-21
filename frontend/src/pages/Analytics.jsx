@@ -73,7 +73,7 @@ const Analytics = () => {
         {/* Weekly Performance Chart */}
         <div className="glass-panel chart-panel">
           <h3>Weekly Performance</h3>
-          {dayData.length > 0 ? (
+          {Array.isArray(dayData) && dayData.length > 0 ? (
             <div style={{ width: '100%', height: 250 }}>
               <ResponsiveContainer>
                 <BarChart data={dayData}>
@@ -95,7 +95,7 @@ const Analytics = () => {
         {/* Most Missed Habits */}
         <div className="glass-panel chart-panel">
           <h3>⚠️ Most Missed (Last 30 Days)</h3>
-          {missedHabits.length > 0 ? (
+          {Array.isArray(missedHabits) && missedHabits.length > 0 ? (
             <ul className="missed-list">
               {missedHabits.slice(0, 5).map((m, i) => (
                 <li key={i} className="missed-item">
@@ -112,7 +112,7 @@ const Analytics = () => {
         {/* Per-Habit Breakdown */}
         <div className="glass-panel chart-panel full-width">
           <h3>Habit Breakdown</h3>
-          {habitStats.length > 0 ? (
+          {Array.isArray(habitStats) && habitStats.length > 0 ? (
             <ul className="habit-stats-list">
               {habitStats.map((h, i) => (
                 <li key={i} className="habit-stat-item">
